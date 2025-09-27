@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>Welcome to GadgetHub</title>
+        <style>
+                body {
+                        font-family: 'Segoe UI', Arial, sans-serif;
+                        background: linear-gradient(120deg, #e0e7ef 0%, #f8fafc 100%);
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100vh;
+                        margin: 0;
+                        position: relative;
+                        overflow: hidden;
+                }
+                .gadget-bg {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100vw;
+                        height: 100vh;
+                        z-index: 0;
+                        pointer-events: none;
+                        overflow: hidden;
+                }
+                .gadget-bg img {
+                        position: absolute;
+                        opacity: 0.13;
+                        width: 120px;
+                        height: auto;
+                        transition: opacity 0.3s, transform 0.5s;
+                        cursor: pointer;
+                }
+                .gadget1 { top: 10%; left: 5%; transform: rotate(-15deg);}
+                .gadget2 { top: 70%; left: 80%; transform: rotate(10deg);}
+                .gadget3 { top: 60%; left: 20%; transform: rotate(-8deg);}
+                .gadget4 { top: 20%; left: 70%; transform: rotate(18deg);}
+                .gadget-bg img:hover {
+                        opacity: 0.3;
+                        transform: scale(1.2) rotate(10deg);
+                }
+                .nav-links {
+                        position: fixed;
+                        top: 32px;
+                        left: 32px;
+                        margin: 0;
+                        z-index: 2;
+                        display: flex;
+                        gap: 10px;
+                }
+                .nav-link-btn {
+                        text-decoration: none;
+                        color: #1a4fa0;
+                        margin: 0;
+                        font-weight: bold;
+                        transition: color 0.2s, transform 0.2s;
+                        padding: 10px 22px;
+                        border-radius: 8px;
+                        background: #e3edfa;
+                        box-shadow: 0 2px 8px rgba(26,79,160,0.06);
+                        display: inline-block;
+                        font-size: 1.1em;
+                }
+                .nav-link-btn:hover {
+                        color: #fff;
+                        background: #1a4fa0;
+                        transform: scale(1.09);
+                        box-shadow: 0 4px 16px rgba(26,79,160,0.13);
+                }
+                .welcome-container {
+                        background: #fff;
+                        padding: 48px 70px;
+                        border-radius: 16px;
+                        box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+                        text-align: center;
+                        z-index: 1;
+                        position: relative;
+                        animation: fadeIn 1s;
+                }
+                @keyframes fadeIn {
+                        from { opacity: 0; transform: translateY(-30px);}
+                        to { opacity: 1; transform: translateY(0);}
+                }
+                h1 {
+                        color: #1a4fa0;
+                        margin-bottom: 18px;
+                        font-size: 2.5em;
+                        letter-spacing: 1px;
+                        animation: popIn 1s;
+                }
+                @keyframes popIn {
+                        0% { transform: scale(0.8); opacity: 0;}
+                        80% { transform: scale(1.1);}
+                        100% { transform: scale(1); opacity: 1;}
+                }
+                p {
+                        color: #333;
+                        font-size: 1.25em;
+                        margin-bottom: 18px;
+                }
+                .featured-gadgets {
+                        margin-top: 30px;
+                        display: flex;
+                        justify-content: center;
+                        gap: 32px;
+                }
+                .gadget-card {
+                        background: #f6fafd;
+                        border-radius: 10px;
+                        box-shadow: 0 2px 8px rgba(26,79,160,0.05);
+                        padding: 18px 24px;
+                        text-align: center;
+                        transition: transform 0.2s, box-shadow 0.2s;
+                        width: 140px;
+                }
+                .gadget-card:hover {
+                        transform: translateY(-8px) scale(1.04);
+                        box-shadow: 0 6px 24px rgba(26,79,160,0.13);
+                }
+                .gadget-card img {
+                        width: 60px;
+                        margin-bottom: 10px;
+                }
+                .gadget-card span {
+                        display: block;
+                        color: #1a4fa0;
+                        font-weight: 600;
+                        font-size: 1em;
+                }
+        </style>
+</head>
+<body>
+        
+        <div class="nav-links">
+                <button class="nav-link-btn" onclick="home()">Home</button>
+                <button class="nav-link-btn" >About us</a>
+                <button class="nav-link-btn" >Profile</a>
+        </div>
+        <div class="welcome-container">
+                <h1 id="welcome-title">Welcome to GadgetHub!</h1>
+                <p id="welcome-msg">Discover the latest and coolest gadgets. Your one-stop shop for all things tech!</p>
+                <div class="featured-gadgets">
+                        
+                       <div class="gadget-card" onclick="img1()">
+                                <img src="https://img.icons8.com/ios-filled/100/000000/smartphone.png" alt="Smartphone">
+                                <span>Smartphones</span>
+                        </div>
+                        <div class="gadget-card">
+                                <img src="https://img.icons8.com/ios-filled/100/000000/laptop.png" alt="Laptop">
+                                <span>Laptops</span>
+                        </div>
+                        <div class="gadget-card">
+                                <img src="data:image/png;base64,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" alt="Smartwatch">
+                                <span>Wearables</span>
+                        </div>
+                </div>
+        </div>
+        <script>
+                // Interactive gadget images: bounce on click
+                document.querySelectorAll('.gadget-bg img').forEach(img => {
+                        img.addEventListener('click', function() {
+                                this.style.transition = "transform 0.2s";
+                                this.style.transform += " scale(1.4)";
+                                setTimeout(() => {
+                                        this.style.transform = this.style.transform.replace(" scale(1.4)", "");
+                                }, 200);
+                        });
+                });
+
+                // Welcome message changes on hover
+                const welcomeMsg = document.getElementById('welcome-msg');
+                const welcomeTitle = document.getElementById('welcome-title');
+                welcomeTitle.addEventListener('mouseover', () => {
+                        welcomeMsg.textContent = "Explore trending gadgets, exclusive deals, and more!";
+                });
+                welcomeTitle.addEventListener('mouseout', () => {
+                        welcomeMsg.textContent = "Discover the latest and coolest gadgets. Your one-stop shop for all things tech!";
+                });
+                function img1(){
+                  window.location.href="/p";
+                }
+                function home(){
+                        window.location.href="/home";
+                }
+        </script>
+</body>
+</html>

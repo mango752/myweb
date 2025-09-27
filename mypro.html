@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoShop - Sustainable Shopping</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">       
+    <style>
+        /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo h2 {
+    font-weight: 600;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #e8f5e8;
+}
+
+.cart-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: relative;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.cart-icon:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+/* Hero Section */
+.hero {
+    background: url('https://source.unsplash.com/random/1600x900/?nature') no-repeat center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-top: 80px; /* Account for fixed header */
+}
+
+.hero-content {
+    background: rgba(0,0,0,0.4);
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #4CAF50;
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.cta-button:hover {
+    background: #45a049;
+}
+
+/* Products Section */
+.products {
+    padding: 5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #4CAF50;
+}
+
+/* Category Filters */
+.category-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: white;
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #4CAF50;
+    color: white;
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 1.5rem;
+}
+
+.product-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.product-info p {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: #4CAF50;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.add-to-cart {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.add-to-cart:hover {
+    background: #45a049;
+}
+
+/* About Section */
+.about {
+    padding: 5rem 2rem;
+    background: #f0f8f0;
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about h2 {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.about p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Cart Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background: white;
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.close:hover {
+    color: #333;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.remove-item {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.cart-total {
+    text-align: right;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+}
+
+.checkout-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+}
+
+/* Footer */
+.footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .category-filters {
+        gap: 0.5rem;
+    }
+
+    .filter-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <h2>EcoShop</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒 <span id="cart-count">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section (Home Page Welcome) -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to EcoShop</h1>
+            <p>Discover eco-friendly products across various categories. Shop sustainably and make a positive impact.</p>
+            <a href="#products" class="cta-button">Browse Categories</a>
+        </div>
+    </section>
+
+    <!-- Products Section with Category Filters -->
+    <section id="products" class="products">
+        <h2 class="section-title">Our Products</h2>
+        
+        <!-- Category Filter Buttons -->
+        <div class="category-filters">
+            <button class="filter-btn active" data-category="all" onclick="filterProducts('all')">All</button>
+            <button class="filter-btn" data-category="clothing" onclick="filterProducts('clothing')">Clothing</button>
+            <button class="filter-btn" data-category="personal-care" onclick="filterProducts('personal-care')">Personal Care</button>
+            <button class="filter-btn" data-category="accessories" onclick="filterProducts('accessories')">Accessories</button>
+            <button class="filter-btn" data-category="tech" onclick="filterProducts('tech')">Tech</button>
+        </div>
+        
+        <div class="product-grid" id="product-grid">
+            <!-- Products will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- About Section (Placeholder) -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>We are committed to sustainable living. Every product is chosen for its eco-friendly impact.</p>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleCart()">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <strong>Total: $<span id="cart-total">0</span></strong>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <p>&copy; 2023 EcoShop. All rights reserved. | Made with ❤️ for the planet.</p>
+    </footer>
+
+    <script>
+        // Sample Products Data with Categories
+const products = [
+    {
+        id: 1,
+        name: "Organic Cotton T-Shirt",
+        description: "Soft, eco-friendly tee made from recycled materials.",
+        price: 29.99,
+        image: "https://tse1.mm.bing.net/th/id/OIP.sj57sH6lOxLDGQnYb8BnTgHaE1?pid=Api&P=0&h=180ttps://sp.yimg.com/ib/th?id=OPAC.B%2b1dIZwQWS6prw474C474&o=5&pid=21.1&w=160&h=105",
+        category: "clothing"
+    },
+    {
+        id: 2,
+        name: "Bamboo Toothbrush",
+        description: "Biodegradable toothbrush for sustainable oral care.",
+        price: 5.99,
+        image: "https://source.unsplash.com/random/300x200/?toothbrush",
+        category: "personal-care"
+    },
+    {
+        id: 3,
+        name: "Reusable Water Bottle",
+        description: "Stainless steel bottle to reduce plastic waste.",
+        price: 19.99,
+        image: "https://source.unsplash.com/random/300x200/?waterbottle",
+        category: "accessories"
+    },
+    {
+        id: 4,
+        name: "Eco Bag",
+        description: "Canvas tote for zero-waste shopping.",
+        price: 12.99,
+        image: "https://source.unsplash.com/random/300x200/?bag",
+        category: "accessories"
+    },
+    {
+        id: 5,
+        name: "Solar Charger",
+        description: "Portable charger powered by the sun.",
+        price: 49.99,
+        image: "https://source.unsplash.com/random/300x200/?solar",
+        category: "tech"
+    },
+    {
+        id: 6,
+        name: "Natural Soap Bar",
+        description: "Handmade soap with organic ingredients.",
+        price: 8.99,
+        image: "https://source.unsplash.com/random/300x200/?soap",
+        category: "personal-care"
+    }
+    // Add more products as needed
+];
+
+// Shopping Cart
+let cart = [];
+
+// Current Filter
+let currentCategory = 'all';
+
+// Populate Product Grid (Filtered)
+function renderProducts(category = 'all') {
+    const filteredProducts = category === 'all' ? products : products.filter(p => p.category === category);
+    const grid = document.getElementById('product-grid');
+    grid.innerHTML = filteredProducts.map(product => `
+        <div class="product-card">
+            <img src="${product.image}" alt="${product.name}">
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <div class="price">$${product.price.toFixed(2)}</div>
+                <button class="add-to-cart" onclick="addToCart(${product.id})">Add to Cart</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Filter Products by Category
+function filterProducts(category) {
+    currentCategory = category;
+    renderProducts(category);
+    
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+}
+
+// Add to Cart
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    const existingItem = cart.find(item => item.id === productId);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+    
+    updateCartDisplay();
+    alert(`${product.name} added to cart!`); // Simple feedback
+}
+
+// Update Cart Display (Count and Modal)
+function updateCartDisplay() {
+    const cartCount = document.getElementById('cart-count');
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCount.textContent = totalItems;
+
+    const cartItemsEl = document.getElementById('cart-items');
+    const cartTotalEl = document.getElementById('cart-total');
+    
+    if (cart.length === 0) {
+        cartItemsEl.innerHTML = '<p>Your cart is empty.</p>';
+        cartTotalEl.textContent = '0';
+    } else {
+        cartItemsEl.innerHTML = cart.map(item => `
+            <div class="cart-item">
+                <span>${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}</span>
+                <button class="remove-item" onclick="removeFromCart(${item.id})">Remove</button>
+            </div>
+        `).join('');
+        
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        cartTotalEl.textContent = total.toFixed(2);
+    }
+}
+
+// Remove from Cart
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCartDisplay();        
+}
+    </script>
+</body>
+</html>
